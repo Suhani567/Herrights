@@ -1,0 +1,115 @@
+import {useState} from 'react'
+const Navbar = () => {
+    const [language,setLanguage] = useState("EN");
+    const [isOpen, setIsOpen] = useState(false);
+
+    const navLinks = [
+        {href: "#home",label: "Home"},
+        {href: "#askai",label: "Ask AI"},
+        {href: "#laws",label: "Laws"},
+        {href: "#guides",label: "Guides"},
+        {href: "#resources",label: "Resources"},
+        {href: "#contact",label: "Contact/Support"}
+    ];
+    
+    const toggleLanguage = () => {
+    setLanguage(language === "EN" ? "HI" : "EN");
+  };
+
+   return (
+    <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm">
+        <div className="w-full container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 md:h-20 h-16">
+            
+
+            {/* logo */}
+            <div className="flex items-center gap-1 cursor-pointer">
+               <img src="logo.png" alt="herrights logo" className="w-12 h-12 rounded-full object-cover transition duration-300 hover:scale-105 hover:shadow-lg hover:shadow-pink-400/50" />
+               <span className='text-xl font-bold text-pink-600'>HerRights</span>
+            </div>
+
+            {/* nav links */}
+
+            <ul className='hidden md:flex items-center space-x-8 text-gray-700 font-medium'>
+            {navLinks.map((link) => (
+                <li key={link.href} className='relative group'>
+                    <a href={link.href} className=' hover:text-pink-600 transition-colors'>
+                        {link.label}
+                    </a>
+                    <span className='absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-600 transition-all group-hover:w:full'></span>
+                </li>
+            ))}
+</ul>
+
+
+       {/* right side : language toggle and login button  */}
+       <div className='flex items-center gap-4'>
+
+
+        <button
+        onClick={toggleLanguage}
+        className='px-3 py-1 round-lg border border-pink-600 text-pink-600 hover:bg-pink-100 transition'
+        > 
+        {language === "EN" ? "हिंदी" : "English"}
+
+        </button>
+
+
+        <button className='px-4 py-2 rounded-lg bg-pink-600 text-white font-medium shadow-md hover:scale-105 transition'> 
+            Login
+        </button>
+       </div>
+
+       {/* Mobile Menu Button */}
+          <div className="flex items-center md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="text-gray-700 hover:text-pink-600 focus:outline-none"
+            >
+              {/* Hamburger icon */}
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={isOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                />
+              </svg>
+            </button>
+          </div>
+</div>
+         {/* Mobile Menu DRopdown*/}
+         {isOpen && (
+            <div className='absolute right-4 top-16 w-48 bg-white border border-gray-200 shadow-lg md:hidden'>
+                <ul className='flex flex-col space-y-2 px-4 py-3 text-gray-700 font-medium'>
+                    {navLinks.map((link) => (
+                        <li key={link.href}>
+
+                        <a href={link.href} className='block hover:text-pink-600 transition'
+                            onClick={() => setIsOpen(false)}
+                        >{link.label}
+
+                        </a>
+                        </li>
+                    ))}
+                 </ul>
+
+                   {/* language + login (mobile) */}
+    <div className="flex flex-col gap-3 px-6 pb-4">
+      <button
+        onClick={toggleLanguage}
+        className="px-3 py-2 rounded-lg border border-pink-600 text-pink-600 hover:bg-pink-100 transition"
+      >
+        {language === "EN" ? "हिंदी" : "English"}
+      </button>
+
+      <button className="px-4 py-2 rounded-lg bg-pink-600 text-white font-medium shadow-md hover:scale-105 transition">
+        Login
+      </button>
+    </div>
+            </div>
+         )}
+          
+    </nav>
+   );
+};
+export default Navbar;
