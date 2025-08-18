@@ -7,7 +7,7 @@ const Navbar = () => {
         {href: "#home",label: "Home"},
         {href: "#askai",label: "Ask AI"},
         {href: "#laws",label: "Laws"},
-        {href: "#guides",label: "Guides"},
+        // {href: "#guides",label: "Guides"},
         {href: "#resources",label: "Resources"},
         {href: "#contact",label: "Contact/Support"}
     ];
@@ -18,7 +18,7 @@ const Navbar = () => {
 
    return (
     <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm">
-        <div className="w-full container mx-auto flex items-center justify-between px-4 sm:px-6 lg:px-8 md:h-20 h-16">
+        <div className="w-full container mx-auto flex flex-wrap items-center justify-between px-4 sm:px-6 lg:px-8 md:h-20 h-16">
             
 
             {/* logo */}
@@ -29,32 +29,32 @@ const Navbar = () => {
 
             {/* nav links */}
 
-            <ul className='hidden md:flex items-center space-x-8 text-gray-700 font-medium'>
+            <ul className='hidden md:flex flex-wrap items-center gap-4 lg:gap-6 xl:gap-8  text-gray-700 font-medium'>
             {navLinks.map((link) => (
                 <li key={link.href} className='relative group'>
                     <a href={link.href} className=' hover:text-pink-600 transition-colors'>
                         {link.label}
                     </a>
-                    <span className='absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-600 transition-all group-hover:w:full'></span>
+                    <span className='absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-600 transition-all group-hover:w-full'></span>
                 </li>
             ))}
 </ul>
 
 
        {/* right side : language toggle and login button  */}
-       <div className='flex items-center gap-4'>
+       <div className='hidden md:flex items-center gap-3 lg:gap-4'>
 
 
         <button
         onClick={toggleLanguage}
-        className='px-3 py-1 round-lg border border-pink-600 text-pink-600 hover:bg-pink-100 transition'
+        className='px-3 md:px-3 py-1 rounded-lg border border-pink-600 text-pink-600 hover:bg-pink-100 transition'
         > 
         {language === "EN" ? "हिंदी" : "English"}
 
         </button>
 
 
-        <button className='px-4 py-2 rounded-lg bg-pink-600 text-white font-medium shadow-md hover:scale-105 transition'> 
+        <button className='px-3 md:px-4 py-2 rounded-lg bg-pink-600 text-white font-medium shadow-md hover:scale-105 transition'> 
             Login
         </button>
        </div>
@@ -79,7 +79,7 @@ const Navbar = () => {
 </div>
          {/* Mobile Menu DRopdown*/}
          {isOpen && (
-            <div className='absolute right-4 top-16 w-48 bg-white border border-gray-200 shadow-lg md:hidden'>
+            <div className='absolute right-4 top-16 w-48 bg-white border border-gray-200 shadow-lg lg:hidden'>
                 <ul className='flex flex-col space-y-2 px-4 py-3 text-gray-700 font-medium'>
                     {navLinks.map((link) => (
                         <li key={link.href}>
