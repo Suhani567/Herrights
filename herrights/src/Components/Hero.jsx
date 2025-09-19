@@ -26,9 +26,11 @@ const Hero = () => {
           <button className='px-6 py-3 bg-pink-600 text-white font-semibold rounded-lg shadow-md hover:bg-pink-700 hover:shadow-lg transition-all duration-300 hover:scale-105'>
             Ask AI Now
           </button>
+          <a href="#resources">
           <button className='px-6 py-3 border-2 border-pink-600 text-pink-600 font-semibold rounded-lg hover:bg-pink-50 transition-all duration-300'>
             Explore Resources
           </button>
+          </a>
         </div>
 
         <div className='flex items-center space-x-6 pt-4'>
