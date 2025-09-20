@@ -1,17 +1,19 @@
 import {useState} from 'react'
+import { Link } from 'react-router-dom'
+
 const Navbar = () => {
     const [language,setLanguage] = useState("EN");
     const [isOpen, setIsOpen] = useState(false);
 
     const navLinks = [
-        {href: "#home",label: "Home"},
-        {href: "#askai",label: "Ask AI"},
+        {href: "/",label: "Home"},
+        {href: "/ask-ai",label: "Ask AI"},
         {href: "#laws",label: "Laws"},
         // {href: "#guides",label: "Guides"},
         {href: "#resources",label: "Resources"},
         {href: "#contact",label: "Contact/Support"}
     ];
-    
+
     const toggleLanguage = () => {
     setLanguage(language === "EN" ? "HI" : "EN");
   };
@@ -19,7 +21,7 @@ const Navbar = () => {
    return (
     <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 border-b border-gray-100 shadow-sm">
         <div className="w-full container mx-auto flex flex-wrap items-center justify-between px-4 sm:px-6 lg:px-8 md:h-20 h-16">
-            
+
 
             {/* logo */}
             <div className="flex items-center gap-1 cursor-pointer">
@@ -32,9 +34,26 @@ const Navbar = () => {
             <ul className='hidden md:flex flex-wrap items-center gap-4 lg:gap-6 xl:gap-8  text-gray-700 font-medium'>
             {navLinks.map((link) => (
                 <li key={link.href} className='relative group'>
-                    <a href={link.href} className=' hover:text-pink-600 transition-colors'>
-                        {link.label}
-                    </a>
+                  {link.href.startsWith('/') ? (
+                    <Link
+                      to={link.href}
+                      className='cursor-pointer hover:text-pink-600 transition-colors'
+                    >
+                      {link.label}
+                    </Link>
+                  ) : (
+                    <span
+                       onClick={() => {
+                        const element = document.getElementById(link.href.slice(1));
+                        if(element) element.scrollIntoView({behavior: 'smooth'});
+
+                       }}
+                       className='cursor-pointer hover:text-pink-600 transition-colors'
+
+                    >
+                      {link.label}
+                    </span>
+                  )}
                     <span className='absolute left-0 -bottom-1 w-0 h-0.5 bg-pink-600 transition-all group-hover:w-full'></span>
                 </li>
             ))}
@@ -48,13 +67,13 @@ const Navbar = () => {
         <button
         onClick={toggleLanguage}
         className='px-3 md:px-3 py-1 rounded-lg border border-pink-600 text-pink-600 hover:bg-pink-100 transition'
-        > 
+        >
         {language === "EN" ? "हिंदी" : "English"}
 
         </button>
 
 
-        <button className='px-3 md:px-4 py-2 rounded-lg bg-pink-600 text-white font-medium shadow-md hover:scale-105 transition'> 
+        <button className='px-3 md:px-4 py-2 rounded-lg bg-pink-600 text-white font-medium shadow-md hover:scale-105 transition'>
             Login
         </button>
        </div>
@@ -84,11 +103,23 @@ const Navbar = () => {
                     {navLinks.map((link) => (
                         <li key={link.href}>
 
-                        <a href={link.href} className='block hover:text-pink-600 transition'
+                        {link.href.startsWith('/') ? (
+                          <Link
+                            to={link.href}
+                            className='block hover:text-pink-600 transition'
                             onClick={() => setIsOpen(false)}
-                        >{link.label}
-
-                        </a>
+                          >
+                            {link.label}
+                          </Link>
+                        ) : (
+                          <a
+                            href={link.href}
+                            className='block hover:text-pink-600 transition'
+                            onClick={() => setIsOpen(false)}
+                          >
+                            {link.label}
+                          </a>
+                        )}
                         </li>
                     ))}
                  </ul>
@@ -108,7 +139,7 @@ const Navbar = () => {
     </div>
             </div>
          )}
-          
+
     </nav>
    );
 };
