@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-*x3*51+az0v&!^yf3hfeo(&*a@04crau_jm!@$itecd%!#3map
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]  # add your dev hosts here
 
 
 # Application definition
@@ -133,4 +133,77 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "http://localhost:8000",
 ]
+
+# Allow credentials for cross-origin requests
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Environment variables configuration
+import environ
+import os
+
+# Initialize environment variables
+env = environ.Env(
+    DEBUG=(bool, False),
+    OPENAI_API_KEY=(str, ''),
+)
+
+# Read .env file if it exists
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
+# Set DEBUG from environment variable, default to True for development
+DEBUG = env.bool('DEBUG', default=True)
+
+# Set ALLOWED_HOSTS based on DEBUG setting
+if DEBUG:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'localhost:8000']
+else:
+    ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+
+# OpenAI API Key (already handled in views.py, but keeping for reference)
+OPENAI_API_KEY = env('OPENAI_API_KEY')
+
+# Logging configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+        'file': {
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, 'logs', 'django.log'),
+            'formatter': 'verbose',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'file'],
+        'level': 'INFO',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'core': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}

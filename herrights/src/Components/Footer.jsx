@@ -4,7 +4,7 @@ import {Facebook, Twitter, Instagram, Mail} from 'lucide-react'
 
 const Footer = () =>{
     return (
-        <footer className='bg-gray-900 text-gray-300 py-10 px-6'>
+        <footer id="contact" className='bg-gray-900 text-gray-300 py-10 px-6'>
             <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8'>
 
                 {/* About */}
@@ -12,8 +12,8 @@ const Footer = () =>{
              <div>
                 <h2 className='text-xl font-bold text-white mb-3'> HerRights </h2>
                 <p className='text-sm text-gray-400'>
-                     Empowering women with knowledge, AI support, and community.  
-            Together, we build a safer and stronger future. 
+                     Empowering women with knowledge, AI support, and community.
+            Together, we build a safer and stronger future.
                 </p>
              </div>
 
@@ -29,15 +29,15 @@ const Footer = () =>{
                 </ul>
              </div>
 
-             {/* Contanct and solcials */}
+             {/* Contact and socials */}
 
              <div>
                 <h3 className='text-lg font-semibold text-white mb-3'>Connect</h3>
                 <div className='flex space-x-4'>
                     <a href="#" className='hover:text-pink-500'><Facebook size={20}/></a>
                     <a href="#" className='hover:text-pink-500'><Twitter size={20}/></a>
-                    <a href="#" className='hover:text-pink-500'><Instagram size={20}/></a>
-                    <a href= "contact@herrights.com" className='hover:text-pink-500'><Mail size={20} /></a>
+                    <a href="https://instagram.com/Suhani_vh" className='hover:text-pink-500'><Instagram size={20}/></a>
+                    <a href="mailto:suhani190505@gmail.com" className='hover:text-pink-500'><Mail size={20} /></a>
 
                 </div>
              </div>

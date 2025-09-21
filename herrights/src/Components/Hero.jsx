@@ -6,7 +6,7 @@ const Hero = () => {
   const navigate = useNavigate()
 
   return (
-    <section className='container mx-auto flex flex-col md:flex-row justify-between items-center pt-44 pb-6 sm:px-6 lg:px-8 min-h-screen relative'>
+    <section id="home" className='container mx-auto flex flex-col md:flex-row justify-between items-center pt-44 pb-6 sm:px-6 lg:px-8 min-h-screen relative'>
       {/* Background gradient positioned more to the left */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -left-20 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse"></div>

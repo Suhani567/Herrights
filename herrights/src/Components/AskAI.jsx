@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 
 const AskAI = () => {
-    const [question,setQuestion] = useState("");
-    const [answer,setAnswer] = useState("");
-    const [loading,setLoading] = useState("");
-    const [error,setError] = useState("");
+    const [question, setQuestion] = useState("");
+    const [answer, setAnswer] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -12,22 +12,50 @@ const AskAI = () => {
         setError("");
         setAnswer("");
 
+        // Validate input
+        if (!question.trim()) {
+            setError("Please enter a question.");
+            setLoading(false);
+            return;
+        }
+
         try {
-            const response = await fetch('http://localhost:8000/api/ask-ai/',{
+            const response = await fetch('http://localhost:8000/api/ask-ai/', {
                 method: 'POST',
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({question}),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({question: question.trim()}),
             });
 
-            if(!response.ok){
-                throw new Error("Something went wrong with the API.");
-            }
             const data = await response.json();
-            setAnswer(data.answer);
-        } catch(err) {
-            setError(err.message || "Failed to fetch the answer.");
 
-        }finally{
+            if (!response.ok) {
+                // Handle different error scenarios
+                if (response.status === 400) {
+                    setError(data.error || "Please provide a valid question.");
+                } else if (response.status === 500) {
+                    setError(data.error || "Server error occurred. Please check your API key configuration.");
+                } else {
+                    setError(data.error || "Something went wrong with the API.");
+                }
+                return;
+            }
+
+            // Success case
+            if (data.answer) {
+                setAnswer(data.answer);
+            } else {
+                setError("No answer received from the AI service.");
+            }
+        } catch(err) {
+            console.error("Fetch error:", err);
+            if (err.name === 'TypeError' && err.message.includes('fetch')) {
+                setError("Cannot connect to the server. Please make sure the backend server is running on http://localhost:8000");
+            } else {
+                setError(err.message || "Failed to fetch the answer. Please try again.");
+            }
+        } finally {
             setLoading(false);
         }
     };
