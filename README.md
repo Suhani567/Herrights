@@ -1,221 +1,80 @@
-# HerRights - Women's Rights Platform
+# Herrights Project
 
-A comprehensive platform empowering women with legal knowledge, AI-powered guidance, and community support.
+<img width="1890" height="904" alt="image" src="https://github.com/user-attachments/assets/855b48ea-ad3e-419d-a158-9cfdc23eec7d" />
 
-## 🚀 Features
 
-- **AI-Powered Legal Guidance**: Get instant answers to legal questions
-- **Comprehensive Resources**: Access to legal information and rights
-- **Community Support**: Connect with others and share experiences
-- **Responsive Design**: Works seamlessly on all devices
-- **Modern UI**: Built with React and Tailwind CSS
+## Project Overview
 
-## 🛠️ Tech Stack
+Herrights is a full-stack web application designed to empower users with easy access to legal documents, community stories, FAQs, and legal resources. The platform features user authentication, document generation, and a rich community interface.
 
-### Frontend
-- **React 19** - Modern React with hooks
-- **Vite** - Fast build tool and dev server
-- **Tailwind CSS** - Utility-first CSS framework
-- **Lucide React** - Beautiful icons
+## Tech Stack
+
+- **Backend:** Django (Python)
+- **Frontend:** React.js with Vite bundler
+- **Styling:** CSS (custom and library-based)
+- **Build Tool:** Vite
+- **Database:** Django default (likely SQLite or configured backend)
+- **APIs:** RESTful APIs served by Django backend
+- **Deployment:** Vercel configuration available (vercel.json)
+
+## Features
+
+- User authentication (login/signup)
+- Document generation based on user inputs
+- Community stories sharing and testimonials
+- FAQ and Help pages for legal topics
+- Responsive user interface with modern React components
+- Wallet connect features for blockchain integrations (as indicated by web3 utilities)
+- Multi-language support using Context API
+
+## Project Preview
+
+<img width="1877" height="874" alt="image" src="https://github.com/user-attachments/assets/cb98697a-a355-4d9c-8cb8-20c41a272c57" />
+<img width="1870" height="790" alt="image" src="https://github.com/user-attachments/assets/fbeae9be-5549-46a0-8a2a-c63c2fcd7294" />
+
+
+
+## How to Run
 
 ### Backend
-- **Django** - Python web framework
-- **Django REST Framework** - API development
-- **SQLite** - Database (development)
-- **CORS Headers** - Cross-origin resource sharing
 
-## 🚀 Quick Start
-
-### Prerequisites
-- Node.js (v16 or higher)
-- Python (v3.8 or higher)
-- npm or yarn
-
-### Installation
-
-1. **Clone the repository**
+1. Go to backend folder:
    ```bash
-   git clone <repository-url>
-   cd herrights
+   cd herrights/herrights-backend
    ```
-
-2. **Install frontend dependencies**
+2. Set up Python virtual environment and activate it.
+3. Install dependencies:
    ```bash
-   npm install
-   ```
-
-3. **Install backend dependencies**
-   ```bash
-   cd herrights-backend
    pip install -r requirements.txt
    ```
-
-4. **Run database migrations**
+4. Run migrations:
    ```bash
    python manage.py migrate
    ```
-
-5. **Start the development servers**
-
-   **Terminal 1 - Frontend:**
+5. Start backend server:
    ```bash
-   cd ..  # Go back to root directory
-   npm run dev
-   ```
-
-   **Terminal 2 - Backend:**
-   ```bash
-   cd herrights-backend
    python manage.py runserver
    ```
 
-6. **Open your browser**
-   - Frontend: http://localhost:5174/
-   - Backend: http://localhost:8000/
-   - Admin Panel: http://localhost:8000/admin/
+### Frontend
 
-## 📦 Deployment
-
-### Vercel (Recommended)
-
-1. **Install Vercel CLI**
+1. Navigate to frontend folder:
    ```bash
-   npm i -g vercel
+   cd herrights
+   ```
+2. Install node modules:
+   ```bash
+   npm install
+   ```
+3. Start frontend dev server:
+   ```bash
+   npm run dev
    ```
 
-2. **Deploy**
-   ```bash
-   vercel
-   ```
+## License
 
-3. **Set Environment Variables** (in Vercel dashboard)
-   - Add your Django backend URL as `VITE_API_URL`
-
-### Netlify
-
-1. **Build the project**
-   ```bash
-   npm run build
-   ```
-
-2. **Deploy to Netlify**
-   - Drag and drop the `dist` folder to Netlify
-   - Or use Netlify CLI: `netlify deploy --prod --dir=dist`
-
-### Manual Deployment
-
-1. **Build the frontend**
-   ```bash
-   npm run build
-   ```
-
-2. **Serve the built files**
-   ```bash
-   # Using Python
-   cd dist && python -m http.server 3000
-
-   # Using Node.js
-   npx serve dist -s
-   ```
-
-## 🔧 Configuration
-
-### Environment Variables
-
-Create a `.env` file in the root directory:
-
-```env
-VITE_API_URL=http://localhost:8000
-VITE_APP_NAME=HerRights
-```
-
-### Django Settings
-
-The backend is configured with:
-- CORS enabled for frontend origins
-- Django REST Framework
-- SQLite database (for development)
-
-## 📁 Project Structure
-
-```
-herrights/
-├── public/                 # Static assets
-├── src/                    # React source code
-│   ├── Components/         # React components
-│   ├── Assets/            # Images and media
-│   ├── App.jsx            # Main app component
-│   └── main.jsx           # App entry point
-├── herrights-backend/      # Django backend
-│   ├── core/              # Main app
-│   ├── herrights/         # Project settings
-│   └── manage.py          # Django management script
-├── dist/                  # Build output
-└── node_modules/          # Dependencies
-```
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Commit your changes: `git commit -m 'Add feature'`
-4. Push to the branch: `git push origin feature-name`
-5. Submit a pull request
-
-## 📝 API Documentation
-
-### Endpoints
-
-- `POST /api/ask-ai/` - Submit questions to AI
-- `GET /admin/` - Django admin panel
-
-### Request Format
-
-```json
-{
-  "question": "Your legal question here"
-}
-```
-
-### Response Format
-
-```json
-{
-  "answer": "AI-generated response"
-}
-```
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-1. **CORS Errors**
-   - Ensure Django CORS settings are correct
-   - Check if frontend URL is in `CORS_ALLOWED_ORIGINS`
-
-2. **Build Errors**
-   - Clear node_modules: `rm -rf node_modules && npm install`
-   - Clear cache: `npm cache clean --force`
-
-3. **Database Issues**
-   - Run migrations: `python manage.py migrate`
-   - Create superuser: `python manage.py createsuperuser`
-
-## 📄 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-- Built with React and Django
-- Icons by Lucide React
-- Styling with Tailwind CSS
-- AI integration for legal guidance
-
-## 📞 Support
-
-For support, please contact the development team or create an issue in the repository.
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ---
 
-**Made with ❤️ for women's empowerment**
+Thank you for using Herrights!
